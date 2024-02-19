@@ -1,19 +1,32 @@
 ---
 - hosts: 127.0.0.1
+  become: true
   tasks:
     - name: Print message
       debug:
         msg: Hello World
+
+    # Add apt repos
+    - name: Add Docker GPG apt key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu jammy stable
+        state: present
+
+    # install apt packages
     - name: Update cache and install packages
       apt:
         pkg:
         - jq
+        - docker-ce
         update_cache: yes
         cache_valid_time: 3600
         autoremove: yes
         purge: true
-      become: true
+
     - name: apt-get clean
       apt:
         clean: yes
-      become: true
