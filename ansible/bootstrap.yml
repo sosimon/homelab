@@ -30,3 +30,13 @@
     - name: apt-get clean
       apt:
         clean: yes
+
+    - name: Create docker group
+      group:
+        name: docker
+        state: present
+    - name: Add user "{{ ansible_env.USER }}" to docker group
+      user:
+        name: "{{ ansible_env.USER }}"
+        groups: docker
+        append: yes
