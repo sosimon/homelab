@@ -1,5 +1,7 @@
 # homelab
 
+This is my homelab. There are many like it, but this one is mine.
+
 ## dev vm bootstrap
 - `sudo apt-get update && sudo apt-get upgrade`
 - generate SSH keypair
