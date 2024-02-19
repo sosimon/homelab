@@ -4,3 +4,16 @@
     - name: Print message
       debug:
         msg: Hello World
+    - name: Update cache and install packages
+      apt:
+        pkg:
+        - jq
+        update_cache: yes
+        cache_valid_time: 3600
+        autoremove: yes
+        purge: true
+      become: true
+    - name: apt-get clean
+      apt:
+        clean: yes
+      become: true
