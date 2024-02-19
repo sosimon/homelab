@@ -3,6 +3,9 @@
 ## dev vm bootstrap
 - `sudo apt-get update && sudo apt-get upgrade`
 - generate SSH keypair
+  ```bash
+  ssh-keygen -t ed25519 -C "simon.so@gmail.com"
+  ```
 - pip
   ```bash
   curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
