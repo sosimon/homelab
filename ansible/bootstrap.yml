@@ -15,13 +15,26 @@
       apt_repository:
         repo: deb https://download.docker.com/linux/ubuntu jammy stable
         state: present
+    - name: Add Neovim (Unstable) Repository
+      apt_repository:
+        repo: ppa:neovim-ppa/unstable
+        state: present
+    - name: Add Neovim (Stable) Repository
+      apt_repository:
+        repo: ppa:neovim-ppa/stable
+        state: present
 
     # install apt packages
     - name: Update cache and install packages
       apt:
         pkg:
-        - jq
+        - build-essential
         - docker-ce
+        - fd-find
+        - fzf
+        - jq
+        - neovim
+        - ripgrep
         update_cache: yes
         cache_valid_time: 3600
         autoremove: yes
@@ -40,3 +53,9 @@
         name: simon
         groups: docker
         append: yes
+
+    - name: Install nvm
+      shell: >
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+      args:
+        creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
